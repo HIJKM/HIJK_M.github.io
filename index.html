@@ -1,11 +1,86 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
+    <link rel="stylesheet" href="src/style.css">
+    <title>rnonologue or monolog</title>
+    <style>
+        body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #3a3a3a;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.splash-text {
+  text-align: center;
+  font-size: 50px;
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: opacity 1s, transform 1s;
+  position: relative;
+  z-index: 1;
+}
+
+.smoke {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ca9fff;
+  border-radius: 50%;
+  transform: scale(1);
+  animation: smokeAnimation 1s ease-out;
+}
+
+@keyframes smokeAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(30);
+    opacity: 0;
+  }
+}
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+  const splashText = document.querySelector('.splash-text');
+
+  setTimeout(() => {
+    splashText.style.opacity = '1';
+    splashText.style.transform = 'translateY(0)';
+
+    createSmoke(splashText);
+  }, 500);
+
+  function createSmoke(container) {
+    const smoke = document.createElement('div');
+    smoke.classList.add('smoke');
+    container.appendChild(smoke);
+
+    const x = container.clientWidth / 2;
+    const y = container.clientHeight / 2;
+
+    smoke.style.left = `${x}px`;
+    smoke.style.top = `${y}px`;
+
+    setTimeout(() => {
+      smoke.remove();
+    }, 1000);
+  }
+})
+    </script>
 </head>
 <body>
-    <p>뭘봐</p>
+    <div class="splash-container">
+        <h1 class="splash-text">뭐</h1>
+    </div>
 </body>
 </html>
